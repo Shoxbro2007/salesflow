@@ -14,12 +14,11 @@ const getHeaders = () => {
 
 // 🔐 Авторизация
 export const login = async (username: string, password: string) => {
-  const response = await fetch(`${API_URL}/token/`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password }),
+  const response = await axios.post(`${API_URL}/api/token/`, {
+    username,
+    password,
   });
-  return await response.json();
+  return response.data;
 };
 
 // 📋 Получить всех лидов
