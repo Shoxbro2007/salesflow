@@ -1,21 +1,15 @@
+# render.yaml
 services:
-  - type: web
-    name: salesflow-frontend
-    region: frankfurt
-    buildCommand: cd frontend && pnpm install && pnpm run build
-    publishCommand: cd frontend/dist
-    plan: free
-
   - type: web
     name: salesflow-backend
     region: frankfurt
     plan: free
     env: docker
     dockerfilePath: Dockerfile
-    buildCommand: echo "Docker будет использовать Dockerfile"
+    buildCommand: echo "Используется Dockerfile"
     envVars:
       - key: SECRET_KEY
-        value: your-django-secret-key-change-it
+        value: your-django-secret-key-change-it-123456789
       - key: DEBUG
         value: False
       - key: ALLOWED_HOSTS
@@ -26,3 +20,10 @@ services:
           property: connectionString
     databases:
       - name: salesflow-db
+
+  - type: web
+    name: salesflow-frontend
+    region: frankfurt
+    plan: free
+    buildCommand: cd frontend && npm install && npm run build
+    publishCommand: cd frontend/dist
