@@ -96,19 +96,39 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # ← Должен быть В НАЧАЛЕ!
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # ← добавь здесь
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 # Статика
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # WhiteNoise
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# CORS
+CORS_ALLOWED_ORIGINS = [
+    "https://salesflow-frontend-t1qm.onrender.com",
+    "http://localhost:3000",  # для локальной разработки
+]
+
+# Опционально: разрешить credentials (куки, авторизация)
+CORS_ALLOW_CREDENTIALS = True
+
+ALLOWED_HOSTS = [
+    "salesflow-backend-bn0i.onrender.com",
+    "localhost",
+    "127.0.0.1",
+]
+ALLOWED_HOSTS = [
+    "salesflow-backend-bn0i.onrender.com",
+    "localhost",
+    "127.0.0.1",
+]
