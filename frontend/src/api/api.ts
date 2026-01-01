@@ -1,6 +1,7 @@
 // src/api/api.ts
 
-const API_URL = 'http://localhost:8000/api';
+const API_URL = 'https://salesflow-backend-bn0i.onrender.com';
+
 
 // Получить заголовки с токеном
 const getHeaders = () => {
