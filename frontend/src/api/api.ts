@@ -1,47 +1,38 @@
 // src/api/api.ts
+import axios from 'axios';
 
 const API_URL = 'https://salesflow-backend-bn0i.onrender.com';
 
+interface LoginData {
+  username: string;
+  password: string;
+}
 
-// Получить заголовки с токеном
-const getHeaders = () => {
-  const token = localStorage.getItem('access');
-  return {
-    'Content-Type': 'application/json',
-    ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
-  };
+interface TokenResponse {
+  access: string;
+  refresh: string;
+  username: string;
+}
+
+export const login = async (data: LoginData): Promise<TokenResponse> => {
+  const response = await axios.post<TokenResponse>(`${API_URL}/api/token/`, data);
+  return response.data;
 };
 
-// 🔐 Авторизация
-export const login = async (username: string, password: string) => {
-  const response = await axios.post(`${API_URL}/api/token/`, {
-    username,
-    password,
+export const fetchLeads = async (token: string) => {
+  const response = await axios.get(`${API_URL}/api/leads/`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
   return response.data;
 };
 
-// 📋 Получить всех лидов
-export const fetchLeads = async () => {
-  const response = await fetch(`${API_URL}/leads/`, {
-    headers: getHeaders(),
+export const createLead = async (lead: { name: string; email: string; phone: string; status: string }, token: string) => {
+  const response = await axios.post(`${API_URL}/api/leads/`, lead, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   });
-  if (!response.ok) throw new Error('Ошибка загрузки лидов');
-  return await response.json();
-};
-
-// ➕ Добавить нового лида (с учётом статуса)
-export const addLead = async (data: {
-  name: string;
-  email: string;
-  phone: string;
-  status: string;
-}) => {
-  const response = await fetch(`${API_URL}/leads/`, {
-    method: 'POST',
-    headers: getHeaders(),
-    body: JSON.stringify(data),
-  });
-  if (!response.ok) throw new Error('Ошибка добавления лида');
-  return await response.json();
+  return response.data;
 };
