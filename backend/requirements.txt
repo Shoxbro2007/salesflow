@@ -8,4 +8,4 @@ coreapi  # для drf-spectacular (альтернатива)
 drf-spectacular  # современная замена drf-yasg
 dj-database-url==2.0.0
 gunicorn==21.2.0
-
+whitenoise==6.8.0
