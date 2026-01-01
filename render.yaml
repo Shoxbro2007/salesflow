@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: salesflow-frontend
+    region: frankfurt
+    buildCommand: cd frontend && pnpm install && pnpm run build
+    publishCommand: cd frontend/dist
+    plan: free
+
+  - type: web
+    name: salesflow-backend
+    region: frankfurt
+    plan: free
+    env: docker
+    dockerfilePath: Dockerfile
+    buildCommand: echo "Docker будет использовать Dockerfile"
+    envVars:
+      - key: SECRET_KEY
+        value: your-django-secret-key-change-it
+      - key: DEBUG
+        value: False
+      - key: ALLOWED_HOSTS
+        value: salesflow-backend.onrender.com
+      - key: DATABASE_URL
+        fromDatabase:
+          name: salesflow-db
+          property: connectionString
+    databases:
+      - name: salesflow-db
