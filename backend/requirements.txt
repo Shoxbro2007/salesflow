@@ -6,6 +6,6 @@ djangorestframework-simplejwt==5.3
 python-decouple==3.8
 coreapi  # для drf-spectacular (альтернатива)
 drf-spectacular  # современная замена drf-yasg
-
+dj-database-url==2.0.0
 
 
