@@ -5,14 +5,13 @@
     plan: free
     env: docker
     dockerfilePath: Dockerfile
-    buildCommand: echo "Building with Docker"
     envVars:
       - key: SECRET_KEY
         value: your-django-secret-key-change-it-123456
       - key: DEBUG
         value: False
       - key: ALLOWED_HOSTS
-        value: salesflow-backend.onrender.com
+        value: salesflow-backend-urx1.onrender.com
       - key: DATABASE_URL
         fromDatabase:
           name: salesflow-db
@@ -25,4 +24,4 @@
     region: frankfurt
     plan: free
     buildCommand: cd frontend && npm install && npm run build
-    publishCommand: cd frontend/dist
+    publishCommand: frontend/dist  # ✅ Правильный путь
