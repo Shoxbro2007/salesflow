@@ -1,7 +1,13 @@
+// frontend/package.json
 {
   "name": "salesflow-frontend",
   "private": true,
   "version": "0.1.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
   "dependencies": {
     "axios": "^1.7.7",
     "react": "^18.2.0",
@@ -14,10 +20,5 @@
     "@vitejs/plugin-react": "^3.0.0",
     "typescript": "^4.9.3",
     "vite": "^4.0.0"
-  },
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
   }
 }
