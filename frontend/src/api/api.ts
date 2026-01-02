@@ -1,7 +1,8 @@
 // src/api/api.ts
 import axios from 'axios';
 
-const API_URL = 'https://salesflow-backend-bn0i.onrender.com';
+const API_URL = 'https://salesflow-backend-urx1.onrender.com';
+
 
 interface LoginData {
   username: string;
