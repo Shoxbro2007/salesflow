@@ -1,7 +1,7 @@
 // frontend/src/components/LeadList.tsx
 import { useState, useEffect } from 'react';
+import LeadForm from './LeadForm'; // ✅ Теперь найдёт
 import { fetchLeads, createLead } from '../api/api';
-import LeadForm from './LeadForm';
 import { Lead } from '../api/api';
 
 const LeadList = () => {
@@ -20,7 +20,7 @@ const LeadList = () => {
 
   const handleAddLead = async (newLead: Omit<Lead, 'id'>) => {
     if (token) {
-      const createdLead = await createLead({ ...newLead }, token);
+      const createdLead = await createLead(newLead, token);
       setLeads([...leads, createdLead]);
     }
   };
@@ -41,3 +41,4 @@ const LeadList = () => {
 };
 
 export default LeadList;
+

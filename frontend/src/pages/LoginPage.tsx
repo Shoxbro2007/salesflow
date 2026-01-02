@@ -1,20 +1,21 @@
-// src/pages/LoginPage.tsx
-import React from 'react';
-import LoginForm from '../components/LoginForm';
+// frontend/src/pages/LoginPage.tsx
 import { useNavigate } from 'react-router-dom';
+import LoginForm from '../components/LoginForm';
 
-const LoginPage: React.FC = () => {
+const LoginPage = () => {
   const navigate = useNavigate();
 
-  const handleLogin = () => {
+  const handleSuccess = () => {
     navigate('/leads');
   };
 
   return (
     <div className="login-page">
-      <LoginForm onLogin={handleLogin} />
+      <h1>CRM Система</h1>
+      <LoginForm onSuccess={handleSuccess} /> {/* ✅ onSuccess, не onLogin */}
     </div>
   );
 };
 
 export default LoginPage;
+
