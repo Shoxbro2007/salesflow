@@ -1,12 +1,8 @@
-// src/components/LoginForm.tsx
-import React, { useState } from 'react';
+// frontend/src/components/LoginForm.tsx
+import { useState } from 'react';
 import { login } from '../api/api';
 
-interface LoginFormProps {
-  onLogin: () => void;
-}
-
-const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
+const LoginForm = ({ onSuccess }: { onSuccess: () => void }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -14,43 +10,40 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const data = await login(username, password);
-      if (data.access) {
-        localStorage.setItem('access', data.access);
-        localStorage.setItem('refresh', data.refresh);
-        onLogin();
-      } else {
-        setError('Неверный логин или пароль');
-      }
+      const data = await login({ username, password });
+      localStorage.setItem('token', data.access);
+      onSuccess();
     } catch (err) {
-      setError('Ошибка подключения к серверу');
+      setError('Неверный логин или пароль');
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="login-form">
-      <h2>Войти в CRM</h2>
+    <div className="login-container">
+      <h2>Вход</h2>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <div>
-        <label>Логин</label>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label>Пароль</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-      </div>
-      <button type="submit">Войти</button>
-    </form>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Логин</label>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Пароль</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit">Войти</button>
+      </form>
+    </div>
   );
 };
 
