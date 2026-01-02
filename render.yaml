@@ -23,5 +23,6 @@
     name: salesflow-frontend
     region: frankfurt
     plan: free
+    env: static-site  # ✅ ВАЖНО: говорит Render — это НЕ сервер, а статика
     buildCommand: cd frontend && npm install && npm run build
-    publishCommand: frontend/dist  # ✅ Правильный путь
+    publishCommand: frontend/dist
