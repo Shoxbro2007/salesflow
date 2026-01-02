@@ -127,8 +127,10 @@ ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
 ]
+# backend/crm/settings.py
+
 ALLOWED_HOSTS = [
-    "salesflow-backend-bn0i.onrender.com",
-    "localhost",
-    "127.0.0.1",
+    'salesflow-backend-urx1.onrender.com',
+    'localhost',
+    '127.0.0.1',
 ]
