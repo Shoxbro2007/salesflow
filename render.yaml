@@ -1,15 +1,14 @@
-# render.yaml
-services:
+ services:
   - type: web
     name: salesflow-backend
     region: frankfurt
     plan: free
     env: docker
     dockerfilePath: Dockerfile
-    buildCommand: echo "Используется Dockerfile"
+    buildCommand: echo "Building with Docker"
     envVars:
       - key: SECRET_KEY
-        value: your-django-secret-key-change-it-123456789
+        value: your-django-secret-key-change-it-123456
       - key: DEBUG
         value: False
       - key: ALLOWED_HOSTS
